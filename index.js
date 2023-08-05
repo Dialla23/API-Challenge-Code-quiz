@@ -3,7 +3,7 @@ let quiz_question= document.getElementById('quiz_question')
 let initial_division= document.getElementById('initial_division')
 let quizTime= 25;
 let timer_section= document.getElementById('timer_section')
-let questionnumber= 1
+let globalindex= 1
 
 let questions= [{
     name:"question 1",
@@ -28,10 +28,10 @@ start_quiz_btn.addEventListener('click',function(event){
 
 function startQuiz(){
     startTimer()
-    populateQuestions()
+    populateQuestions(globalindex)
 }
 
-function populateQuestions(){
+function populateQuestions(questionnumber){
     quiz_question.innerHTML= ""
     let curentQuestion = questions[questionnumber-1]
     let primaryDiv = document.createElement("div")
@@ -39,17 +39,36 @@ function populateQuestions(){
     questionDiv.innerHTML = curentQuestion.name
     primaryDiv.append(questionDiv)
     let choices = curentQuestion.choices
+    let answers = questions[questionnumber-1].answers
     for(let i= 0;i<choices.length;i++){
         let optionbutton = document.createElement("button")
         optionbutton.innerHTML = choices[i]
         primaryDiv.append(optionbutton)
-        // button EventListener()
+      optionbutton.addEventListener("click",function(){
+        console.log(optionbutton.innerHTML)
+     verifieanswers(optionbutton,answers)
+
+      })
 
     }
     quiz_question.append(primaryDiv)
     
 }
-
+function verifieanswers(optionbutton,answers){
+    if(optionbutton.innerHTML===answers){
+        console.log("Correct!!!")
+        let namestatus= document.createElement("h1")
+        namestatus.textContent="Correct!!!"
+        quiz_question.appendChild(namestatus)
+       globalindex++;
+       populateQuestions(globalindex) 
+    }
+    else{
+        console.log("Wrong!!!")
+        globalindex++;
+        populateQuestions(globalindex)
+    }
+}
 function startTimer(){
     let timer= setInterval(function(){
         if(quizTime >=0){
