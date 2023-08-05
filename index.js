@@ -3,6 +3,8 @@ let quiz_question= document.getElementById('quiz_question')
 let initial_division= document.getElementById('initial_division')
 let quizTime= 25;
 let timer_section= document.getElementById('timer_section')
+let questionnumber= 1
+
 let questions= [{
     name:"question 1",
     choises:["choise 1","choise 2", "choise 3"],
@@ -26,6 +28,13 @@ start_quiz_btn.addEventListener('click',function(event){
 
 function startQuiz(){
     startTimer()
+    populateQuestions()
+}
+
+function populateQuestions(){
+    let curentQuestion = questionarray[questionnumber-1]
+    let questionDiv = document.createElement("div")
+    questionDiv.innerHTML = curentQuestion.name
 }
 
 function startTimer(){
