@@ -7,16 +7,16 @@ let questionnumber= 1
 
 let questions= [{
     name:"question 1",
-    choises:["choise 1","choise 2", "choise 3"],
-    answers: "choise 2"
+    choices:["choice 1","choice 2", "choice 3"],
+    answers: "choice 2"
 },{
     name:"question 2",
-    choises:["choise 1","choise 2", "choise 3"],
-    answers: "choise 1"
+    choices:["choice 1","choice 2", "choice 3"],
+    answers: "choice 1"
 },{
     name:"question 3",
-    choises:["choise 1","choise 2", "choise 3"],
-    answers: "choise 3"
+    choices:["choice 1","choice 2", "choice 3"],
+    answers: "choice 3"
 }]
 
 start_quiz_btn.addEventListener('click',function(event){
@@ -32,9 +32,22 @@ function startQuiz(){
 }
 
 function populateQuestions(){
-    let curentQuestion = questionarray[questionnumber-1]
+    quiz_question.innerHTML= ""
+    let curentQuestion = questions[questionnumber-1]
+    let primaryDiv = document.createElement("div")
     let questionDiv = document.createElement("div")
     questionDiv.innerHTML = curentQuestion.name
+    primaryDiv.append(questionDiv)
+    let choices = curentQuestion.choices
+    for(let i= 0;i<choices.length;i++){
+        let optionbutton = document.createElement("button")
+        optionbutton.innerHTML = choices[i]
+        primaryDiv.append(optionbutton)
+        // button EventListener()
+
+    }
+    quiz_question.append(primaryDiv)
+    
 }
 
 function startTimer(){
